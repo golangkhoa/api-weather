@@ -13,7 +13,6 @@ func main() {
 	r.Use(middleware.Logger)
 	r.Get("/", jsonHandler)
 	r.Get("/location/{place}", jsonHandler)
-	r.Get("/weather.ico", faviconHandler)
 	http.ListenAndServe(":3000", r)
 }
 
@@ -25,8 +24,4 @@ func jsonHandler(w http.ResponseWriter, r *http.Request) {
 	} else if json != "true" {
 		handlers.PlaceHandler(q, w, r)
 	}
-}
-
-func faviconHandler(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./weather.ico")
 }
